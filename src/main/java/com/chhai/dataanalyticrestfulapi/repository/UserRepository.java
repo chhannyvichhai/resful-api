@@ -6,6 +6,7 @@ import com.chhai.dataanalyticrestfulapi.model.UserAccount;
 import org.apache.ibatis.annotations.*;
 import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -45,6 +46,16 @@ public interface UserRepository {
     @Select("select * from useraccount_tb inner join account_tb a on a.id = useraccount_tb.account_id\n" +
             "where user_id = #{id}")
     List<Account> findAccountByUserId(int id);
+
+    @Update("update users_tb\n" +
+            "set username = #{user.username}, gender = #{user.gender}, address = #{user.address}\n" +
+            "where id = #{id}")
+    int updateUsers(@PathVariable("user") User user, int id);
+
+
+
+
+
 
 
 }

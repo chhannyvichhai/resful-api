@@ -58,5 +58,15 @@ public class UserResController {
         }
     }
 
+    @PutMapping("/{id}")
+    public Response<User> updateUser(@PathVariable int id, @RequestBody User user){
+        try {
+            userService.updateUser(user, id);
+            return Response.<User>updateSuccess().setPayload(user).setMessage("Update Successfully !");
+        }catch (Exception ex){
+            return Response.<User>exception().setMessage("Update Not Success !").setSuccess(false);
+        }
+    }
+
 }
 
