@@ -1,6 +1,7 @@
 package com.chhai.dataanalyticrestfulapi.service.serviceImpl;
 
 import com.chhai.dataanalyticrestfulapi.model.User;
+import com.chhai.dataanalyticrestfulapi.model.UserAccount;
 import com.chhai.dataanalyticrestfulapi.repository.UserRepository;
 import com.chhai.dataanalyticrestfulapi.service.UserService;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     // inject repository
     UserRepository userRepository;
+
+    @Override
+    public List<UserAccount> getAllUserAccounts() {
+        return userRepository.getAllUserAccounts();
+    }
+
     UserServiceImpl(UserRepository userRepository){
         this.userRepository = userRepository;
     }
@@ -32,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int createNewUser(User user) {
-        return 0;
+        return userRepository.createNewUser(user);
     }
 
     @Override
