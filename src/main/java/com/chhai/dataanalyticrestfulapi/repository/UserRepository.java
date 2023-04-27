@@ -22,7 +22,7 @@ public interface UserRepository {
     @Insert("insert into users_tb (username, gender, address) values (#{user.username}, #{user.gender},#{user.address})")
     int createNewUser(@Param("user") User user);
     int updateUserByID(int id);
-    int removeUser(int id);
+//    int removeUser(int id);
 
     @Result(property = "userId", column = "id")
     @Select("select * from users_tb where id = #{id}")
@@ -52,7 +52,9 @@ public interface UserRepository {
             "where id = #{id}")
     int updateUsers(@PathVariable("user") User user, int id);
 
-
+    @Delete("delete from users_tb\n" +
+            "where id = #{id}")
+    int removeUser(int id);
 
 
 

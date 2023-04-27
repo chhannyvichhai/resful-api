@@ -49,6 +49,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int removeUser(int id) {
-        return 0;
+        return userRepository.removeUser(id);
     }
 }
