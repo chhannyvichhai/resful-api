@@ -32,6 +32,12 @@ public class Response<T> {
             return response;
         }
 
+        public static <T> Response <T> badRequest(){
+            Response<T> response = new Response<>();
+            response.setSuccess(false);
+            return response;
+        }
+
         public static <T> Response<T> createSuccess(){
             Response<T> response = new Response<>();
             response.setStatus(Status.CREATE_SUCCESS);

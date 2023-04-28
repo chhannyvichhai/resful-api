@@ -3,6 +3,7 @@ package com.chhai.dataanalyticrestfulapi.repository;
 import com.chhai.dataanalyticrestfulapi.model.Account;
 import com.chhai.dataanalyticrestfulapi.model.User;
 import com.chhai.dataanalyticrestfulapi.model.UserAccount;
+import com.chhai.dataanalyticrestfulapi.model.request.UserRequest;
 import org.apache.ibatis.annotations.*;
 import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.stereotype.Repository;
@@ -19,8 +20,8 @@ public interface UserRepository {
     List<User> allUsers();
     List<User> findUserByName(String username);
 
-    @Insert("insert into users_tb (username, gender, address) values (#{user.username}, #{user.gender},#{user.address})")
-    int createNewUser(@Param("user") User user);
+    @Select("insert into users_tb (username, gender, address) values (#{user.username}, #{user.gender},#{user.address}) returning id")
+    int createNewUser(@Param("user") UserRequest user);
     int updateUserByID(int id);
 //    int removeUser(int id);
 

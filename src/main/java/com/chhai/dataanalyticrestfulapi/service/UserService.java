@@ -2,6 +2,7 @@ package com.chhai.dataanalyticrestfulapi.service;
 
 import com.chhai.dataanalyticrestfulapi.model.User;
 import com.chhai.dataanalyticrestfulapi.model.UserAccount;
+import com.chhai.dataanalyticrestfulapi.model.request.UserRequest;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface UserService {
 
     User findUserByID(int id);
 
-    int createNewUser(User user);
+    int createNewUser(UserRequest user);
 
     int updateUser(User user, int id);
 

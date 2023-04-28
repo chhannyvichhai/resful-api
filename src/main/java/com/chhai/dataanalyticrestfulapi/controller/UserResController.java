@@ -3,8 +3,11 @@ package com.chhai.dataanalyticrestfulapi.controller;
 
 import com.chhai.dataanalyticrestfulapi.model.User;
 import com.chhai.dataanalyticrestfulapi.model.UserAccount;
+import com.chhai.dataanalyticrestfulapi.model.request.UserRequest;
 import com.chhai.dataanalyticrestfulapi.service.UserService;
 import com.chhai.dataanalyticrestfulapi.utils.Response;
+import jakarta.validation.Valid;
+import org.apache.coyote.Request;
 import org.mapstruct.control.MappingControl;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +29,7 @@ public class UserResController {
             List<User> user = userService.allUsers();
             return Response.<List<User>>ok().setPayload(user).setMessage("Successfully retrieved all users!");
         }catch (Exception ex){
-            return Response.<List<User>>exception().setMessage("Fail to retrieved users!");
+            return Response.<List<User>>exception().setMessage("Fail to retrieved the users! Exception occurred");
         }
 
     }
@@ -48,14 +51,18 @@ public class UserResController {
 
 
     @PostMapping("/newuser")
-    public Response<User> creatingUser(@RequestBody User user){
+    public Response<User> creatingUser(@Valid @RequestBody UserRequest user){
         try {
-            userService.createNewUser(user);
-            return Response.<User>createSuccess().setPayload(user).setMessage("Create New User Successfully!");
-
+           int userID = userService.createNewUser(user);
+            if (userID > 0){
+                User response = new User().setUsername(user.getUsername()).setAddress(user.getAddress()).setGender(user.getGender()).setUserId(userID);
+                return Response.<User>createSuccess().setPayload(response).setMessage("Create New User Successfully!").setSuccess(true);
+            }else {
+                return Response.<User>badRequest().setMessage("Bad Request");
+            }
         }catch(Exception exception){
             exception.printStackTrace();
-            return Response.<User>exception().setMessage("Cannot Create User");
+            return Response.<User>exception().setMessage("Cannot Create User").setSuccess(false);
         }
     }
 
