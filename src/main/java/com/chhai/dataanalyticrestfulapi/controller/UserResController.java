@@ -50,6 +50,7 @@ public class UserResController {
     @PostMapping("/newuser")
     public Response<User> creatingUser(@RequestBody User user){
         try {
+            userService.createNewUser(user);
             return Response.<User>createSuccess().setPayload(user).setMessage("Create New User Successfully!");
 
         }catch(Exception exception){
