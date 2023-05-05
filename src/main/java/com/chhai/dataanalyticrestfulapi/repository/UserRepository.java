@@ -4,6 +4,7 @@ import com.chhai.dataanalyticrestfulapi.model.Account;
 import com.chhai.dataanalyticrestfulapi.model.User;
 import com.chhai.dataanalyticrestfulapi.model.UserAccount;
 import com.chhai.dataanalyticrestfulapi.model.request.UserRequest;
+import com.chhai.dataanalyticrestfulapi.repository.provider.UserProvider;
 import org.apache.ibatis.annotations.*;
 import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.stereotype.Repository;
@@ -16,8 +17,10 @@ import java.util.List;
 public interface UserRepository {
     // if you want to change id to user id
     @Result(column = "id", property = "userId")
-    @Select("select * from users_tb")
-    List<User> allUsers();
+    @SelectProvider(type = UserProvider.class, method = "getAllUsers")
+//    @Select("select * from users_tb")
+    List<User> allUsers(String filterName);
+
     List<User> findUserByName(String username);
 
     @Select("insert into users_tb (username, gender, address) values (#{user.username}, #{user.gender},#{user.address}) returning id")

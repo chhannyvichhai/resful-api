@@ -5,6 +5,8 @@ import com.chhai.dataanalyticrestfulapi.model.UserAccount;
 import com.chhai.dataanalyticrestfulapi.model.request.UserRequest;
 import com.chhai.dataanalyticrestfulapi.repository.UserRepository;
 import com.chhai.dataanalyticrestfulapi.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +26,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> allUsers() {
-        return userRepository.allUsers();
+    public PageInfo<User> allUsers(int page, int size, String filterName) {
+
+        // PageHelper is here
+        PageHelper.startPage(page, size);
+        return new PageInfo<>(userRepository.allUsers(filterName));
+//        return userRepository.allUsers();
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.chhai.dataanalyticrestfulapi.model.UserAccount;
 import com.chhai.dataanalyticrestfulapi.model.request.UserRequest;
 import com.chhai.dataanalyticrestfulapi.service.UserService;
 import com.chhai.dataanalyticrestfulapi.utils.Response;
+import com.github.pagehelper.PageInfo;
 import jakarta.validation.Valid;
 import org.apache.coyote.Request;
 import org.mapstruct.control.MappingControl;
@@ -24,12 +25,13 @@ public class UserResController {
 
 
     @GetMapping("/allusers")
-    public Response<List<User>> getAllUsers(){
+    public Response<PageInfo<User>> getAllUsers(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "") String username){
         try {
-            List<User> user = userService.allUsers();
-            return Response.<List<User>>ok().setPayload(user).setMessage("Successfully retrieved all users!");
+            PageInfo<User> user = userService.allUsers(page, size, username);
+            return Response.<PageInfo<User>>ok().setPayload(user).setMessage("Successfully retrieved all users!");
         }catch (Exception ex){
-            return Response.<List<User>>exception().setMessage("Fail to retrieved the users! Exception occurred");
+            System.out.println(ex.getMessage());
+            return Response.<PageInfo<User>>exception().setMessage("Fail to retrieved the users! Exception occurred");
         }
 
     }
