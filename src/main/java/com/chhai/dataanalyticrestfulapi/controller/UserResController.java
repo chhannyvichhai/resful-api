@@ -23,9 +23,8 @@ public class UserResController {
         this.userService = userService;
     }
 
-
     @GetMapping("/allusers")
-    public Response<PageInfo<User>> getAllUsers(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "") String username){
+    public Response<PageInfo<User>> getAllUsers(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "9") int size, @RequestParam(defaultValue = "") String username){
         try {
             PageInfo<User> user = userService.allUsers(page, size, username);
             return Response.<PageInfo<User>>ok().setPayload(user).setMessage("Successfully retrieved all users!");
@@ -35,8 +34,6 @@ public class UserResController {
         }
 
     }
-
-
     @GetMapping("/{id}")
     public Response<User>findUserByID(@PathVariable int id){
        try {

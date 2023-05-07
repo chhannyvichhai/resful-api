@@ -11,8 +11,6 @@ public class UserProvider {
             if (!filterName.isEmpty()){
                 WHERE("upper(username) like upper('%'||#{filterName}||'%')");
             }
-
-
         }}.toString();
     }
 }

@@ -26,7 +26,7 @@ public class AccountController {
     }
 
     @GetMapping("/allaccounts")
-    public Response<List<AccountResponse>> getAllAccount(){
+    public Response<List<AccountResponse>> getAllAccount() {
 
         try {
             List<Account> allAccount = accountService.getAllAccount();
