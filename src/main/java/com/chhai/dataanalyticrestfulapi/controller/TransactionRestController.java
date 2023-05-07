@@ -65,7 +65,7 @@ public class TransactionRestController {
             if(affectedRow>0){
                 return Response.<Transaction>deleteSuccess().setMessage("Successfully deleted a transaction");
             } else {
-                return Response.<Transaction>notFound().setMessage("Can't find a transaction").setSuccess(false);
+                return Response.<Transaction>notFound().setMessage("Can not find a transaction").setSuccess(false);
             }
         } catch (Exception exception){
             return Response.<Transaction>exception().setMessage("Fail to delete a transaction").setSuccess(false);
