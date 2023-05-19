@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/api/v1/transaction")
 public class TransactionRestController {
     private final TransactionService transactionService;
 

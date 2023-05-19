@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService {
     PageInfo<User> allUsers(int page, int size, String filterName);
 
-    List<User> findUserByName();
+    List<User> findUserByName(String username);
 
     User findUserByID(int id);
 

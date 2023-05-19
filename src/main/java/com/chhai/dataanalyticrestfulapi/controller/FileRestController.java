@@ -4,7 +4,6 @@ import com.chhai.dataanalyticrestfulapi.model.response.FileResponse;
 import com.chhai.dataanalyticrestfulapi.service.FileStorageService;
 import com.chhai.dataanalyticrestfulapi.utils.Response;
 import jakarta.servlet.http.HttpServletRequest;
-import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -16,13 +15,11 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/file-service")
+@RequestMapping("/api/v1/file-service")
 public class FileRestController {
 
     @Autowired

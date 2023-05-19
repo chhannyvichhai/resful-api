@@ -6,7 +6,6 @@ import com.chhai.dataanalyticrestfulapi.model.UserAccount;
 import com.chhai.dataanalyticrestfulapi.model.request.UserRequest;
 import com.chhai.dataanalyticrestfulapi.repository.provider.UserProvider;
 import org.apache.ibatis.annotations.*;
-import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,6 +20,11 @@ public interface UserRepository {
 //    @Select("select * from users_tb")
     List<User> allUsers(String filterName);
 
+    @Select("select * from users_tb where username like #{username}")
+    @Results({
+            @Result(property = "password", column = "secret_key"),
+            @Result(property = "userId", column = "id")
+    })
     List<User> findUserByName(String username);
 
     @Select("insert into users_tb (username, gender, address) values (#{user.username}, #{user.gender},#{user.address}) returning id")
